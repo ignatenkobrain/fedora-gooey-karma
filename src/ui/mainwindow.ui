@@ -704,7 +704,14 @@ p, li { white-space: pre-wrap; }
                     <property name="handleWidth">
                      <number>6</number>
                     </property>
-                    <widget class="QPlainTextEdit" name="commentEdit"/>
+                    <widget class="QPlainTextEdit" name="commentEdit">
+                     <property name="maximumSize">
+                      <size>
+                       <width>16777215</width>
+                       <height>80</height>
+                      </size>
+                     </property>
+                    </widget>
                     <widget class="QTreeWidget" name="treeWidget_feedback">
                      <property name="minimumSize">
                       <size>
