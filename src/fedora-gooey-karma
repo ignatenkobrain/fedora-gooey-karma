@@ -46,6 +46,10 @@ from browser import WebBrowser
 
 from idlequeuedispatcher import ThreadDispatcher
 
+class ShapedClock(QtGui.QWidget):
+    def mouseMoveEvent(self, event):
+        print 'move'
+
 class MainWindow(QtGui.QMainWindow):
 
     __FEDORA_RELEASES = ['Fedora 19', 'Fedora 18', 'Fedora 17']
@@ -135,6 +139,16 @@ class MainWindow(QtGui.QMainWindow):
         self.ui.btn_tool_add_pkg.clicked.connect(self.toolbox.config_add_package, QtCore.Qt.QueuedConnection)
         self.ui.btn_tool_remove_pkg.clicked.connect(self.toolbox.config_remove_package, QtCore.Qt.QueuedConnection)
 
+        # Status list mouse click expand
+        def increaseSize(event):
+            self.ui.statusList.setMaximumHeight(400)
+
+        def decreaseSize(event):
+            self.ui.statusList.setMaximumHeight(80)
+
+        self.ui.statusList.mousePressEvent = increaseSize
+        self.ui.statusList.mouseReleaseEvent = decreaseSize
+
         # Start Bodhi workers
         self.bodhi_workers = []
         for i in range(self.__BODHI_WORKERS_COUNT):
@@ -146,8 +160,9 @@ class MainWindow(QtGui.QMainWindow):
         self.pkg_worker = PackagesWorker(self.pkg_worker_queue, self.bodhi_workers_queue, self.__BODHI_WORKERS_COUNT, self)
         self.pkg_worker.start()
 
-    def dude(self, text):
-        print 'lol', text
+    def dude(self):
+        print 'lol', self.ui.statusList.maximumHeight(), self.ui.statusList.underMouse()
+        self.ui.statusList.setMaximumHeight(200)
 
     def customEvent(self, event):
         # Process idlequeue_dispatcher events
