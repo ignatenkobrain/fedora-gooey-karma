@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui/mainwindow.ui'
 #
-# Created: Tue Aug  6 21:50:14 2013
+# Created: Mon Aug 12 21:53:20 2013
 #      by: pyside-uic 0.2.13 running on PySide 1.1.0
 #
 # WARNING! All changes made in this file will be lost!
@@ -37,6 +37,8 @@ class Ui_MainWindow(object):
         self.groupBox.setObjectName("groupBox")
         self.verticalLayout_5 = QtGui.QVBoxLayout(self.groupBox)
         self.verticalLayout_5.setObjectName("verticalLayout_5")
+        self.horizontalLayout_2 = QtGui.QHBoxLayout()
+        self.horizontalLayout_2.setObjectName("horizontalLayout_2")
         self.searchEdit = QtGui.QLineEdit(self.groupBox)
         font = QtGui.QFont()
         font.setItalic(True)
@@ -44,7 +46,11 @@ class Ui_MainWindow(object):
         self.searchEdit.setInputMask("")
         self.searchEdit.setText("")
         self.searchEdit.setObjectName("searchEdit")
-        self.verticalLayout_5.addWidget(self.searchEdit)
+        self.horizontalLayout_2.addWidget(self.searchEdit)
+        self.pushButton = QtGui.QPushButton(self.groupBox)
+        self.pushButton.setObjectName("pushButton")
+        self.horizontalLayout_2.addWidget(self.pushButton)
+        self.verticalLayout_5.addLayout(self.horizontalLayout_2)
         self.karmaCheckBox = QtGui.QCheckBox(self.groupBox)
         self.karmaCheckBox.setChecked(False)
         self.karmaCheckBox.setObjectName("karmaCheckBox")
@@ -395,6 +401,7 @@ class Ui_MainWindow(object):
         self.tabWidget_side.setCurrentIndex(1)
         self.karmaBox.setCurrentIndex(1)
         QtCore.QObject.connect(self.karmaCheckBox, QtCore.SIGNAL("toggled(bool)"), self.karmaFilterWidget.setShown)
+        QtCore.QObject.connect(self.pushButton, QtCore.SIGNAL("clicked()"), self.searchEdit.clear)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
         MainWindow.setTabOrder(self.karmaBox, self.sendBtn)
         MainWindow.setTabOrder(self.sendBtn, self.loadPackagesBtn)
@@ -407,7 +414,9 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(QtGui.QApplication.translate("MainWindow", "Fedora Gooey Karma", None, QtGui.QApplication.UnicodeUTF8))
         self.groupBox.setTitle(QtGui.QApplication.translate("MainWindow", "Filter", None, QtGui.QApplication.UnicodeUTF8))
         self.searchEdit.setPlaceholderText(QtGui.QApplication.translate("MainWindow", "Search packages...", None, QtGui.QApplication.UnicodeUTF8))
-        self.karmaCheckBox.setText(QtGui.QApplication.translate("MainWindow", "Karma filter", None, QtGui.QApplication.UnicodeUTF8))
+        self.pushButton.setToolTip(QtGui.QApplication.translate("MainWindow", "Clear search", None, QtGui.QApplication.UnicodeUTF8))
+        self.pushButton.setText(QtGui.QApplication.translate("MainWindow", "X", None, QtGui.QApplication.UnicodeUTF8))
+        self.karmaCheckBox.setText(QtGui.QApplication.translate("MainWindow", "User filter", None, QtGui.QApplication.UnicodeUTF8))
         self.karmaFilterUserCombo.setItemText(0, QtGui.QApplication.translate("MainWindow", "Karma not submitted by user", None, QtGui.QApplication.UnicodeUTF8))
         self.karmaFilterUserCombo.setItemText(1, QtGui.QApplication.translate("MainWindow", "Karma submitted by user", None, QtGui.QApplication.UnicodeUTF8))
         self.karmaUsernameEdit.setPlaceholderText(QtGui.QApplication.translate("MainWindow", "username for karma filter", None, QtGui.QApplication.UnicodeUTF8))
