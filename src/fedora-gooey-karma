@@ -160,10 +160,6 @@ class MainWindow(QtGui.QMainWindow):
         self.pkg_worker = PackagesWorker(self.pkg_worker_queue, self.bodhi_workers_queue, self.__BODHI_WORKERS_COUNT, self)
         self.pkg_worker.start()
 
-    def dude(self):
-        print 'lol', self.ui.statusList.maximumHeight(), self.ui.statusList.underMouse()
-        self.ui.statusList.setMaximumHeight(200)
-
     def customEvent(self, event):
         # Process idlequeue_dispatcher events
         event.callback()
