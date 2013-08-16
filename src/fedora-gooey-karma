@@ -46,10 +46,6 @@ from browser import WebBrowser
 
 from idlequeuedispatcher import ThreadDispatcher
 
-class ShapedClock(QtGui.QWidget):
-    def mouseMoveEvent(self, event):
-        print 'move'
-
 class MainWindow(QtGui.QMainWindow):
 
     __FEDORA_RELEASES = ['Fedora 19', 'Fedora 18', 'Fedora 17']
