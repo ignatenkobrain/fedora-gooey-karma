@@ -673,6 +673,9 @@ class MainWindow(QtGui.QMainWindow):
                 bug = QtGui.QTreeWidgetItem()
                 bug.setText(0, str(key))
                 bug.setText(1, str(bodhi_update['bugs_by_id'][key].encode('utf-8')))
+                # Set tooltip with bug title
+                bug.setToolTip(0, str(bodhi_update['bugs_by_id'][key].encode('utf-8')))
+                bug.setToolTip(1, str(bodhi_update['bugs_by_id'][key].encode('utf-8')))
                 self.ui.treeWidget_bugs.insertTopLevelItem(0, bug)
 
         ## Test cases
