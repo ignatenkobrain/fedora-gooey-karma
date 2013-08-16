@@ -8,6 +8,9 @@ DATADIR = /usr/share
 
 all:
 
+run:
+	./src/fedora-gooey-karma
+
 install:
 	mkdir -p $(DESTDIR)$(DATADIR)/$(NAME)
 	install -D -p -m 755 src/$(NAME) $(DESTDIR)$(BINDIR)/$(NAME)
