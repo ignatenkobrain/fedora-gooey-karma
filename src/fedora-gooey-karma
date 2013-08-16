@@ -197,6 +197,8 @@ class MainWindow(QtGui.QMainWindow):
         text = (
             "<b>Fedora Gooey Karma</b> is a tool for browsing installed packages from updates-testing repository.<br><br>"
             "You can easily add karma comment, open bugs attached to new build and more.<br><br>"
+            "Please feel free to <a href=\"https://github.com/blaskovic/fedora-gooey-karma/issues\">report any issues</a> and "
+            "visit <a href=\"https://github.com/blaskovic/fedora-gooey-karma\">homepage</a> of Fedora Gooey Karma.<br><br>"
             "<b>Authors:</b><br>"
             "<ul><li>Branislav Blaskovic</li><li>Tomas Meszaros</li></ul>"
         )
