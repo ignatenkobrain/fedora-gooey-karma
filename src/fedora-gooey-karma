@@ -211,7 +211,8 @@ class MainWindow(QtGui.QMainWindow):
         QtGui.QMessageBox.about(QtGui.QApplication.activeWindow(), "Fedora Gooey Karma", text)
 
     def __add_status_item(self, item):
-        self.ui.statusList.insertItem(0, str(item))
+        self.ui.statusList.addItem(str(item))
+        self.ui.statusList.scrollToBottom()
 
     def bodhi_process_result(self, result):
         variant, data = result
