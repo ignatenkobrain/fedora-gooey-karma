@@ -489,7 +489,10 @@ class MainWindow(QtGui.QMainWindow):
             return
 
         if pkg == None:
-            return pkgList[self.ui.pkgList.currentItem().text()]
+            if self.ui.pkgList.currentItem():
+                return pkgList[self.ui.pkgList.currentItem().text()]
+            else:
+                return self.__selected_pkglist_item
         else:
             return pkgList[pkg]
 
