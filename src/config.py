@@ -96,6 +96,7 @@ class Config:
         self.favorited_packages = PackagesHolder()
         self.fas_name = ''
         self.__fas_password = ''
+        self.tab_side_index = 0
         self.load_config()
 
     # Getters, setters
@@ -103,6 +104,13 @@ class Config:
     def get_fas_password(self): return self.__fas_password
     def set_fas_name(self, name): self.fas_name = str(name)
     def set_fas_password(self, password): self.__fas_password = str(password)
+
+    def __verify_data(self):
+        # Check for side tabbar index
+        try:
+            self.tab_side_index = int(self.tab_side_index)
+        except:
+            self.tab_side_index = 0
 
     def load_config(self):
         # Loads config from home dir
@@ -117,12 +125,18 @@ class Config:
 
         # If we have object from pickle file, assign it
         if obj:
-            for attr in ['favorited_packages', 'ignored_packages', 'fas_name']:
+            for attr in ['favorited_packages', 'ignored_packages', 'fas_name', 'tab_side_index']:
                 setattr(self, attr, getattr(obj, attr, None))
 
         # If username is loaded, get password for it
         if self.fas_name != '':
-            self.__fas_password = keyring.get_password(self.__KEYRING_SERVICE_NAME, self.fas_name)
+            try:
+                self.__fas_password = keyring.get_password(self.__KEYRING_SERVICE_NAME, self.fas_name)
+            except:
+                print "Error in load_config() while loading FAS token from keyring."
+
+        # Verify loaded data
+        self.__verify_data()
 
 
     def save_config(self):
@@ -142,8 +156,11 @@ class Config:
         self.__fas_password = pass_backup
 
         # Save password to keyring (if set)
-        if self.__fas_password != '' and self.fas_name != '':
-            keyring.set_password(self.__KEYRING_SERVICE_NAME, self.fas_name, self.__fas_password)
+        try:
+            if self.__fas_password != '' and self.fas_name != '':
+                keyring.set_password(self.__KEYRING_SERVICE_NAME, str(self.fas_name), str(self.__fas_password))
+        except:
+            print "Error in save_config() while saving FAS token to keyring."
 
 
 

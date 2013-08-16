@@ -72,6 +72,8 @@ class MainWindow(QtGui.QMainWindow):
         ## Set fas username and password to widget
         self.ui.usernameEdit.setText(self.config.get_fas_name())
         self.ui.passwordEdit.setText(self.config.get_fas_password())
+        ## Set side tabbar index
+        self.ui.tabWidget_side.setCurrentIndex(int(self.config.tab_side_index))
 
         # Toolbox/WebBrowser classes
         self.toolbox = Toolbox(self)
@@ -85,7 +87,6 @@ class MainWindow(QtGui.QMainWindow):
         self.rpmTS = rpm.TransactionSet()
         self.__load_and_set_fedora_releases()
         self.ui.tabWidget.setCurrentIndex(0)
-        self.ui.tabWidget_side.setCurrentIndex(0)
         self.ui.toolBoxWhatToTest.setCurrentIndex(0)
         self.ui.karmaFilterWidget.setVisible(False)
         self.toolbox.update_favorite_ignored_pkg_lists()
@@ -121,6 +122,7 @@ class MainWindow(QtGui.QMainWindow):
         self.ui.karmaFilterUserCombo.currentIndexChanged.connect(self.__populate_pkgList, QtCore.Qt.QueuedConnection)
         self.ui.karmaUsernameEdit.textChanged.connect(self.__populate_pkgList, QtCore.Qt.QueuedConnection)
         self.ui.sendBtn.clicked.connect(self.__send_comment, QtCore.Qt.QueuedConnection)
+        self.ui.tabWidget_side.currentChanged.connect(self.__tabside_changed)
         ## Package settings
         self.ui.pkg_settings_open_bodhi_update.clicked.connect(self.webbrowser.show_bodhi_update_in_browser, QtCore.Qt.QueuedConnection)
         self.ui.pkg_settings_download_source_rpm.clicked.connect(self.webbrowser.download_source_rpm, QtCore.Qt.QueuedConnection)
@@ -159,6 +161,10 @@ class MainWindow(QtGui.QMainWindow):
     def customEvent(self, event):
         # Process idlequeue_dispatcher events
         event.callback()
+
+    def __tabside_changed(self, index):
+        self.config.tab_side_index = index
+        self.config.save_config()
 
     def __set_pkg_category(self, checked):
         # There are 2 actions on every click. We just need once
