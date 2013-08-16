@@ -261,7 +261,7 @@
          <string notr="true"/>
         </property>
         <property name="currentIndex">
-         <number>0</number>
+         <number>1</number>
         </property>
         <widget class="QWidget" name="tabWhatToTest">
          <property name="autoFillBackground">
@@ -284,8 +284,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>712</width>
-               <height>454</height>
+               <width>94</width>
+               <height>84</height>
               </rect>
              </property>
              <attribute name="label">
@@ -318,8 +318,8 @@ p, li { white-space: pre-wrap; }
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>712</width>
-               <height>454</height>
+               <width>602</width>
+               <height>103</height>
               </rect>
              </property>
              <attribute name="label">
@@ -373,8 +373,8 @@ p, li { white-space: pre-wrap; }
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>712</width>
-               <height>454</height>
+               <width>361</width>
+               <height>122</height>
               </rect>
              </property>
              <attribute name="label">
@@ -446,8 +446,8 @@ p, li { white-space: pre-wrap; }
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>712</width>
-               <height>454</height>
+               <width>94</width>
+               <height>84</height>
               </rect>
              </property>
              <attribute name="label">
@@ -525,6 +525,9 @@ p, li { white-space: pre-wrap; }
                      </property>
                      <property name="text">
                       <string>Package name</string>
+                     </property>
+                     <property name="textInteractionFlags">
+                      <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
                      </property>
                     </widget>
                    </item>

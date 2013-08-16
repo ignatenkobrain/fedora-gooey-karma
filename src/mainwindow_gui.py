@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui/mainwindow.ui'
 #
-# Created: Mon Aug 12 23:56:07 2013
+# Created: Fri Aug 16 20:49:25 2013
 #      by: pyside-uic 0.2.13 running on PySide 1.1.0
 #
 # WARNING! All changes made in this file will be lost!
@@ -141,7 +141,7 @@ class Ui_MainWindow(object):
         self.toolBoxWhatToTest = QtGui.QToolBox(self.tabWhatToTest)
         self.toolBoxWhatToTest.setObjectName("toolBoxWhatToTest")
         self.toolBoxWelcome = QtGui.QWidget()
-        self.toolBoxWelcome.setGeometry(QtCore.QRect(0, 0, 712, 454))
+        self.toolBoxWelcome.setGeometry(QtCore.QRect(0, 0, 94, 84))
         self.toolBoxWelcome.setObjectName("toolBoxWelcome")
         self.verticalLayout_7 = QtGui.QVBoxLayout(self.toolBoxWelcome)
         self.verticalLayout_7.setObjectName("verticalLayout_7")
@@ -152,7 +152,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_7.addWidget(self.textBrowser_2)
         self.toolBoxWhatToTest.addItem(self.toolBoxWelcome, "")
         self.toolBoxNegativeKarma = QtGui.QWidget()
-        self.toolBoxNegativeKarma.setGeometry(QtCore.QRect(0, 0, 712, 454))
+        self.toolBoxNegativeKarma.setGeometry(QtCore.QRect(0, 0, 602, 103))
         self.toolBoxNegativeKarma.setObjectName("toolBoxNegativeKarma")
         self.verticalLayout_9 = QtGui.QVBoxLayout(self.toolBoxNegativeKarma)
         self.verticalLayout_9.setObjectName("verticalLayout_9")
@@ -173,7 +173,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_12.addWidget(self.tool_pkg_list_running)
         self.toolBoxWhatToTest.addItem(self.toolBoxRunning, "")
         self.toolBoxFavorite = QtGui.QWidget()
-        self.toolBoxFavorite.setGeometry(QtCore.QRect(0, 0, 712, 454))
+        self.toolBoxFavorite.setGeometry(QtCore.QRect(0, 0, 361, 122))
         self.toolBoxFavorite.setObjectName("toolBoxFavorite")
         self.toolBoxFavoriteLayout = QtGui.QVBoxLayout(self.toolBoxFavorite)
         self.toolBoxFavoriteLayout.setObjectName("toolBoxFavoriteLayout")
@@ -204,7 +204,7 @@ class Ui_MainWindow(object):
         self.toolBoxFavoriteLayout.addLayout(self.horizontalLayout_7)
         self.toolBoxWhatToTest.addItem(self.toolBoxFavorite, "")
         self.toolBoxIgnored = QtGui.QWidget()
-        self.toolBoxIgnored.setGeometry(QtCore.QRect(0, 0, 712, 454))
+        self.toolBoxIgnored.setGeometry(QtCore.QRect(0, 0, 94, 84))
         self.toolBoxIgnored.setObjectName("toolBoxIgnored")
         self.toolBoxIgnoredLayout = QtGui.QVBoxLayout(self.toolBoxIgnored)
         self.toolBoxIgnoredLayout.setObjectName("toolBoxIgnoredLayout")
@@ -246,6 +246,7 @@ class Ui_MainWindow(object):
         self.pkgNameLabel.setMouseTracking(False)
         self.pkgNameLabel.setFocusPolicy(QtCore.Qt.NoFocus)
         self.pkgNameLabel.setAcceptDrops(False)
+        self.pkgNameLabel.setTextInteractionFlags(QtCore.Qt.LinksAccessibleByMouse|QtCore.Qt.TextSelectableByMouse)
         self.pkgNameLabel.setObjectName("pkgNameLabel")
         self.verticalLayout_11.addWidget(self.pkgNameLabel)
         self.textBrowser = QtGui.QTextBrowser(self.layoutWidget_2)
@@ -396,7 +397,7 @@ class Ui_MainWindow(object):
         self.menubar.addAction(self.menuHelp.menuAction())
 
         self.retranslateUi(MainWindow)
-        self.tabWidget.setCurrentIndex(0)
+        self.tabWidget.setCurrentIndex(1)
         self.toolBoxWhatToTest.setCurrentIndex(2)
         self.tabWidget_side.setCurrentIndex(0)
         self.karmaBox.setCurrentIndex(1)
