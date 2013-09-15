@@ -30,6 +30,7 @@ sys.path.append(os.path.join(os.path.dirname(sys.argv[0]), '../share/fedora-gooe
 
 import Queue
 import rpm
+import datetime
 from fedora.client import AuthError
 from fedora.client import ServerError
 from fedora.client.bodhi import BodhiClient
@@ -527,6 +528,7 @@ class MainWindow(QtGui.QMainWindow):
         yum_format_string = (
             "<b>Yum Info %(installed_version)s</b>\n"
             "<b>           Name:</b> %(name)s\n"
+            "<b>      Installed:</b> %(installed_timedelta)s ago\n"
             "<b>           Arch:</b> %(arch)s\n"
             "<b>        Version:</b> %(version)s\n"
             "<b>        Release:</b> %(release)s\n"
@@ -558,6 +560,18 @@ class MainWindow(QtGui.QMainWindow):
             yum_values['arch'] = yum_pkg.arch
             yum_values['version'] = yum_pkg.version
             yum_values['release'] = yum_pkg.release
+
+            # Calculate install time
+            now = datetime.datetime.now()
+            install_age=(now - datetime.datetime.fromtimestamp(yum_pkg.installtime))
+            if install_age.days > 0:
+                yum_values['installed_timedelta'] = str(install_age.days) + " days"
+            elif install_age.seconds / 60 / 60 > 2:
+                yum_values['installed_timedelta'] = str(install_age.seconds / 60 / 60) + " hours"
+            else:
+                yum_values['installed_timedelta'] = str(install_age.seconds / 60) + " minutes"
+
+            # Calculate package size
             if yum_pkg.packagesize > 1e6:
                 # It's better to display human readable number format
                 # for the package size, e.g. 1 M (as does $ yum info)
