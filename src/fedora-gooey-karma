@@ -31,9 +31,6 @@ sys.path.append(os.path.join(os.path.dirname(sys.argv[0]), '../share/fedora-gooe
 import Queue
 import rpm
 import datetime
-from fedora.client import AuthError
-from fedora.client import ServerError
-from fedora.client.bodhi import BodhiClient
 from PySide import QtCore
 from PySide import QtGui
 
@@ -46,6 +43,7 @@ from toolbox import Toolbox
 from browser import WebBrowser
 
 from idlequeuedispatcher import ThreadDispatcher
+from sendkarma import SendKarma
 
 class MainWindow(QtGui.QMainWindow):
 
@@ -211,7 +209,7 @@ class MainWindow(QtGui.QMainWindow):
         )
         QtGui.QMessageBox.about(QtGui.QApplication.activeWindow(), "Fedora Gooey Karma", text)
 
-    def __add_status_item(self, item):
+    def add_status_item(self, item):
         self.ui.statusList.addItem(str(item))
         self.ui.statusList.scrollToBottom()
 
@@ -221,7 +219,7 @@ class MainWindow(QtGui.QMainWindow):
         # We've got one bodhi update of installed package, add it to pkg list
         if variant == 'installed':
             self.installed_updates[data['itemlist_name']] = data
-            self.__add_status_item(data['itemlist_name'] + " is installed")
+            self.add_status_item(data['itemlist_name'] + " is installed")
 
             if self.ui.installedBtn.isChecked():
                 # Is this package in list?
@@ -240,7 +238,7 @@ class MainWindow(QtGui.QMainWindow):
         # We've got available package update, save it
         elif variant == 'available':
             self.available_updates[data['itemlist_name']] = data
-            self.__add_status_item(data['itemlist_name'] + " can be updated")
+            self.add_status_item(data['itemlist_name'] + " can be updated")
 
             if self.ui.availableBtn.isChecked():
                 # Is this package in list?
@@ -300,7 +298,7 @@ class MainWindow(QtGui.QMainWindow):
             self.progressBar.setValue(self.progressBar.value() + 1)
 
     def set_installed_packages(self, packages):
-        self.__add_status_item(str(len(packages)) + " installed packages on system")
+        self.add_status_item(str(len(packages)) + " installed packages on system")
         for pkg in packages:
             self.__installed_packages[pkg.nvr] = pkg
         #self.__installed_packages = packages
@@ -369,50 +367,41 @@ class MainWindow(QtGui.QMainWindow):
         # Catch all problems
         if self.__selected_pkglist_item is None:
             message = "Comment not submitted: Could not get update from testing builds"
-            self.__add_status_item(message)
+            self.add_status_item(message)
             return
         if not self.ui.usernameEdit.text():
             message = "Please enter FAS username."
-            self.__add_status_item(message)
+            self.add_status_item(message)
             return
         if not self.ui.passwordEdit.text():
             message = "Please enter FAS password."
-            self.__add_status_item(message)
+            self.add_status_item(message)
             return
 
-        # Prepare message for Bodhi system
-        bc = BodhiClient()
-        bc.username = self.ui.usernameEdit.text()
-        bc.password = self.ui.passwordEdit.text()
+        # Create thread
+        sender = SendKarma(self.__selected_pkglist_item,
+                           self.ui.usernameEdit.text(),
+                           self.ui.passwordEdit.text(),
+                           comment,
+                           karma,
+                           self)
+        sender.start()
+
+        self.ui.sendBtn.setText('Sending in progress')
+        self.ui.sendBtn.setDisabled(True)
 
         message = "Processing... Wait please..."
-        self.__add_status_item(message)
+        self.add_status_item(message)
 
-        # Try send it 3 times if ServerError occours
-        for retry in range(3):
-            try:
-                # Send comment to bodhi
-                bc.comment(self.__selected_pkglist_item["title"], comment, karma=karma)
-                message = "Comment submitted successfully."
-                message2 = ("Reloading bodhi update for "
-                           + str(self.__selected_pkglist_item['itemlist_name']) + "...")
-                self.__add_status_item(message)
-                self.__add_status_item(message2)
-
-                # Reload bodhi update
-                self.bodhi_workers_queue.put(['package_update', self.__selected_pkglist_item['yum_package']])
-                self.ui.commentEdit.clear()
-                self.config.set_fas_name(self.ui.usernameEdit.text())
-                self.config.set_fas_password(self.ui.passwordEdit.text())
-                self.config.save_config()
-                return
-            except AuthError:
-                message = "Invalid username or password. Please try again."
-                self.__add_status_item(message)
-                break
-            except ServerError, e:
-                message = "Server error %s" % str(e)
-                self.__add_status_item(message)
+    def sending_done(self, username, password):
+        # This method is called from thread SendKarma
+        # It clean up after sending
+        self.ui.commentEdit.clear()
+        self.config.set_fas_name(username)
+        self.config.set_fas_password(password)
+        self.config.save_config()
+        self.ui.sendBtn.setText('Send Karma')
+        self.ui.sendBtn.setEnabled(True)
 
     def __update_can_be_shown(self, update):
         # Update need to pass several criteria to appear in current pkg list
