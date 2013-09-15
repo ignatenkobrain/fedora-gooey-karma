@@ -666,7 +666,7 @@ class MainWindow(QtGui.QMainWindow):
         # First descriptions
         descriptions_values = {}
         descriptions_values['yum_description'] = yum_values['description']
-        descriptions_values['bodhi_notes'] = bodhi_values['notes']
+        descriptions_values['bodhi_notes'] = bodhi_values['notes'].replace('\n', '<br>')
         text_browser_descriptions = (
             "<b>Yum description</b></pre>"
             "%(yum_description)s<pre>\n\n"
