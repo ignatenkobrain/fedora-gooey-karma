@@ -142,7 +142,14 @@ class BodhiWorker(QtCore.QThread):
 
     def __bodhi_query_pkg(self, package):
         # Search by name
-        rel = package.release.split('.')[-1].replace('fc','F')
+        for part in package.release.split('.'):
+            if re.search("^fc[0-9]+$", part):
+                rel = part.replace('fc','F')
+
+        # Correct release not found
+        if not rel:
+            return [None, None]
+
         pkg_update = self.bc.query(release=rel, package=package.name, status='testing')['updates']
 
         if pkg_update:
