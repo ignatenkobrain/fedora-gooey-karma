@@ -31,6 +31,7 @@ sys.path.append(os.path.join(os.path.dirname(sys.argv[0]), '../share/fedora-gooe
 import Queue
 import rpm
 import datetime
+import koji
 from PySide import QtCore
 from PySide import QtGui
 
@@ -334,7 +335,7 @@ class MainWindow(QtGui.QMainWindow):
         self.__populate_pkgList()
         self.ui.tool_pkg_list_running.clear()
         releasever = self.ui.releaseComboBox.currentText().split()[-1]
-        self.pkg_worker_queue.put([releasever, self.ui.maxDays.value()])
+        self.pkg_worker_queue.put(releasever)
 
     def __available_pkg_list_loading_info(self):
         release = self.ui.releaseComboBox.currentText()

@@ -25,6 +25,7 @@
 import yum
 import rpm
 import datetime
+import koji
 from PySide import QtCore
 from yum.misc import getCacheDir
 from idlequeue import *
@@ -52,18 +53,18 @@ class PackagesWorker(QtCore.QThread):
 
     def run(self):
         while True:
-            releasever, max_days = self.queue.get()
+            releasever = self.queue.get()
 
             # Start loading packages
             main_thread_call(self.main_thread.installed_pkg_list_loading_info)
-            self.load_installed(releasever, max_days)
+            self.load_installed(releasever)
             # Wait for all packages to be loaded from bodhi
             self.bodhi_workers_queue.join()
             main_thread_call(self.main_thread.save_installed_pkg_list, releasever)
 
             self.queue.task_done()
 
-    def load_installed(self, releasever, max_days):
+    def load_installed(self, releasever):
         # Load from yum rpmdb all installed packages
         self.installed_packages = self.yb.rpmdb.returnPackages()
 
@@ -78,22 +79,20 @@ class PackagesWorker(QtCore.QThread):
         main_thread_call(self.main_thread.set_installed_packages,
                          self.installed_packages)
 
-        # Prepare days
-        now = datetime.datetime.now()
-        installed_max_days = datetime.timedelta(max_days)
+        # Grab it from Koji
+        session = koji.ClientSession('http://koji.fedoraproject.org/kojihub')
+        tagged_packages = session.listTagged('f' + str(releasever) + '-updates-testing')
+
+        # Prepare packages into dictionary to find it faster
+        pkgs_dict = {}
+        for pkg in self.installed_packages:
+            pkgs_dict[pkg.name] = pkg
 
         # See packages for choosen release
         pkgsForBodhi = []
-        for pkg in self.installed_packages:
-            # Get Fedora release shortcut (e.g. fc18)
-            rel = pkg.release.split('.')[-1]
-            # We want just packages newer than XY days
-            installed = datetime.datetime.fromtimestamp(pkg.installtime)
-            installed_timedelta = now - installed
-            if installed_timedelta < installed_max_days:
-                if rel.startswith('fc') and releasever in rel:
-                    if True or pkg.ui_from_repo == '@updates-testing':
-                        pkgsForBodhi.append(pkg)
+        for tagged_pkg in tagged_packages:
+            if tagged_pkg['package_name'] in pkgs_dict.keys():
+                pkgsForBodhi.append(pkgs_dict[tagged_pkg['package_name']])
 
         # Send these packages to BodhiWorker queue
         main_thread_call(self.main_thread.set_num_of_pkgs_to_process,

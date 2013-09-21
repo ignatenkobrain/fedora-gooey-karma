@@ -142,6 +142,7 @@ class BodhiWorker(QtCore.QThread):
 
     def __bodhi_query_pkg(self, package):
         # Search by name
+        rel = None
         for part in package.release.split('.'):
             if re.search("^fc[0-9]+$", part):
                 rel = part.replace('fc','F')

@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui/mainwindow.ui'
 #
-# Created: Fri Aug 16 20:49:25 2013
+# Created: Sat Sep 21 23:44:03 2013
 #      by: pyside-uic 0.2.13 running on PySide 1.1.0
 #
 # WARNING! All changes made in this file will be lost!
@@ -89,29 +89,6 @@ class Ui_MainWindow(object):
         self.pkgList.setTabKeyNavigation(False)
         self.pkgList.setObjectName("pkgList")
         self.verticalLayout.addWidget(self.pkgList)
-        self.horizontalLayout_3 = QtGui.QHBoxLayout()
-        self.horizontalLayout_3.setSizeConstraint(QtGui.QLayout.SetDefaultConstraint)
-        self.horizontalLayout_3.setObjectName("horizontalLayout_3")
-        self.label_4 = QtGui.QLabel(self.pkgLists)
-        self.label_4.setObjectName("label_4")
-        self.horizontalLayout_3.addWidget(self.label_4)
-        self.maxDays = QtGui.QSpinBox(self.pkgLists)
-        self.maxDays.setSuffix("")
-        self.maxDays.setPrefix("")
-        self.maxDays.setMinimum(1)
-        self.maxDays.setMaximum(99999)
-        self.maxDays.setProperty("value", 7)
-        self.maxDays.setObjectName("maxDays")
-        self.horizontalLayout_3.addWidget(self.maxDays)
-        self.label_5 = QtGui.QLabel(self.pkgLists)
-        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Preferred, QtGui.QSizePolicy.Preferred)
-        sizePolicy.setHorizontalStretch(4)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.label_5.sizePolicy().hasHeightForWidth())
-        self.label_5.setSizePolicy(sizePolicy)
-        self.label_5.setObjectName("label_5")
-        self.horizontalLayout_3.addWidget(self.label_5)
-        self.verticalLayout.addLayout(self.horizontalLayout_3)
         self.horizontalLayout_5 = QtGui.QHBoxLayout()
         self.horizontalLayout_5.setObjectName("horizontalLayout_5")
         self.releaseComboBox = QtGui.QComboBox(self.pkgLists)
@@ -141,7 +118,7 @@ class Ui_MainWindow(object):
         self.toolBoxWhatToTest = QtGui.QToolBox(self.tabWhatToTest)
         self.toolBoxWhatToTest.setObjectName("toolBoxWhatToTest")
         self.toolBoxWelcome = QtGui.QWidget()
-        self.toolBoxWelcome.setGeometry(QtCore.QRect(0, 0, 94, 84))
+        self.toolBoxWelcome.setGeometry(QtCore.QRect(0, 0, 84, 84))
         self.toolBoxWelcome.setObjectName("toolBoxWelcome")
         self.verticalLayout_7 = QtGui.QVBoxLayout(self.toolBoxWelcome)
         self.verticalLayout_7.setObjectName("verticalLayout_7")
@@ -204,7 +181,7 @@ class Ui_MainWindow(object):
         self.toolBoxFavoriteLayout.addLayout(self.horizontalLayout_7)
         self.toolBoxWhatToTest.addItem(self.toolBoxFavorite, "")
         self.toolBoxIgnored = QtGui.QWidget()
-        self.toolBoxIgnored.setGeometry(QtCore.QRect(0, 0, 94, 84))
+        self.toolBoxIgnored.setGeometry(QtCore.QRect(0, 0, 84, 84))
         self.toolBoxIgnored.setObjectName("toolBoxIgnored")
         self.toolBoxIgnoredLayout = QtGui.QVBoxLayout(self.toolBoxIgnored)
         self.toolBoxIgnoredLayout.setObjectName("toolBoxIgnoredLayout")
@@ -424,8 +401,6 @@ class Ui_MainWindow(object):
         self.installedBtn.setText(QtGui.QApplication.translate("MainWindow", "Installed", None, QtGui.QApplication.UnicodeUTF8))
         self.availableBtn.setText(QtGui.QApplication.translate("MainWindow", "Available", None, QtGui.QApplication.UnicodeUTF8))
         self.pkgList.setSortingEnabled(True)
-        self.label_4.setText(QtGui.QApplication.translate("MainWindow", "Updated for last", None, QtGui.QApplication.UnicodeUTF8))
-        self.label_5.setText(QtGui.QApplication.translate("MainWindow", "days", None, QtGui.QApplication.UnicodeUTF8))
         self.loadPackagesBtn.setText(QtGui.QApplication.translate("MainWindow", "Reload packages", None, QtGui.QApplication.UnicodeUTF8))
         self.textBrowser_2.setHtml(QtGui.QApplication.translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
