@@ -7,7 +7,11 @@ Rectangle {
     id: main_window
     width: 640
     height: 480
-    color: "#222222"
+    color: "#dedad3"
+    gradient: Gradient {
+        GradientStop { position: 0.0; color: "#dedad3" }
+        GradientStop { position: 1.0; color: "#bebab3" }
+    }
 
     // Spacer
     Rectangle {
@@ -22,11 +26,19 @@ Rectangle {
         id: left_panel
         width: 200
         height: main_window.height
-        color: main_window.color
+        color: "transparent"
         anchors.left: spacer.right
         anchors.leftMargin: overal_padding
+/*
+        Column {
+            anchors.topMargin: overal_padding
+            anchors.fill: parent
+            spacing: 10
+            */
 
-        String {text: "Lorem ipsum dolor sit amet lor fsd ggjj"; color: "white"}
+            String {text: "Lorem ipsum dolor sit amet lor fsd ggjj"; color: "black"; id: "abcdef"}
+            String {text: "druhy"; color: "black"; anchors.top: abcdef.bottom}
+       // }
     }
 
     // Line
@@ -46,18 +58,27 @@ Rectangle {
         width: main_window.width - left_panel.width - right_panel.anchors.leftMargin
         height: main_window.height
         anchors.leftMargin: overal_padding * 2
-        color: main_window.color
+        color: "transparent"
 
-        Panel {
-            id: "panel_name"
-            header_text: "fedora-gooey-karma-5.3.4.rpm"
-            content: String {text: "Six lorem ipsum dolor sit amet consetue lorem ipsum dolor sit amet lorem fedora gooey karma"; color: "white"}
-        }
-        Panel {
-            id: "panel_bugs"
-            header_text: "Bugs"
-            content: String {text: "Tu budu bugy"; color: "white"}
-            y: 70
+        Column {
+            anchors.topMargin: overal_padding
+            anchors.fill: parent
+            spacing: 20
+
+            Panel {
+                id: "panel_name"
+                header_text: "fedora-gooey-karma-5.3.4.rpm"
+                content: String {text: "Six lorem ipsum dolor sit amet consetue lorem ipsum dolor sit amet lorem fedora gooey karma"; color: "black"}
+                height: 100
+            }
+
+            Panel {
+                id: "panel_bugs"
+                header_text: "Bugs"
+                content: String {text: "Tu budu bugy"; color: "black"}
+                height: 100
+            }
+
         }
 
     }

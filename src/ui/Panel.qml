@@ -12,13 +12,17 @@ Item {
 
         id: header_border
         width: parent.width
+        color: "black"
         gradient: Gradient {
-            GradientStop { position: 0.0; color: "#111" }
-            GradientStop { position: 0.5; color: "#222222" }
-            GradientStop { position: 1.0; color: "#111" }
+            GradientStop { position: 0.0; color: "#bebab3" }
+            //GradientStop { position: 0.5; color: "#222222" }
+            GradientStop { position: 1.0; color: "#e9e8e7" }
         }
+        smooth: true
         height: header_text.height + 15
-        radius: 10
+        radius: 5
+        border.color: "#999999"
+        border.width: 1
 
         Text {
             id: header_text
@@ -26,7 +30,7 @@ Item {
             anchors.left: parent.left
             y: 8
             anchors.leftMargin: 10
-            color: "white"
+            color: "black"
             font.pixelSize: 12
             //font.bold: true
         }
