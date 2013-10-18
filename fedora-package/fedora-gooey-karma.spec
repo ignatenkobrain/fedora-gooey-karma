@@ -50,5 +50,5 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
-* Thu Jul 10 2013 Branislav Blaskovic <branislav@blaskovic.sk> - 0.1-1
+* Fri Oct 18 2013 Branislav Blaskovic <branislav@blaskovic.sk> - 0.1-1
 - Initial spec file
