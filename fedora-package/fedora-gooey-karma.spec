@@ -7,7 +7,7 @@ Group:          Development/Tools
 License:        GPLv2+
 URL:            https://fedoraproject.org/wiki/Fedora_Gooey_Karma
 
-Source0:        http://blaskovic.fedorapeople.org/fedora-gooey-karma/fedora-gooey-karma-%{version}.tar.gz
+Source0:        http://blaskovic.fedorapeople.org/fedora-gooey-karma/%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:      noarch
 
@@ -27,7 +27,7 @@ similar tool to fedora-easy-karma but with graphical front-end.
 
 
 %prep
-%setup -q -n fedora-gooey-karma
+%setup -q -n fedora-gooey-karma-%{version}
 
 
 %build
