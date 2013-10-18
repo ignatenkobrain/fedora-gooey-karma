@@ -4,12 +4,13 @@ Release:        1%{?dist}
 Summary:        GUI tool for adding karma to Bodhi system. Similar to fedora-easy-karma
 
 Group:          Development/Tools
-License:        GPLv2+
+License:        GPLv3+
 URL:            https://fedoraproject.org/wiki/Fedora_Gooey_Karma
 
-Source0:        http://blaskovic.fedorapeople.org/fedora-gooey-karma/%{version}.tar.gz
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Source0:        https://github.com/blaskovic/fedora-gooey-karma/archive/%{version}.tar.gz
 BuildArch:      noarch
+
+BuildRequires:  desktop-file-utils
 
 Requires:       python-fedora
 Requires:       fedora-cert
@@ -35,7 +36,13 @@ similar tool to fedora-easy-karma but with graphical front-end.
 
 %install
 rm -rf $RPM_BUILD_ROOT
+
 make install DESTDIR=$RPM_BUILD_ROOT BINDIR=%{_bindir} DATADIR=%{_datadir}
+desktop-file-install                                    \
+--dir=%{buildroot}%{_datadir}/applications              \
+%{buildroot}/%{_datadir}/applications/fedora-gooey-karma.desktop
+
+desktop-file-validate %{buildroot}/%{_datadir}/applications/fedora-gooey-karma.desktop
 
 
 %clean
