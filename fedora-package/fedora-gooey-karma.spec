@@ -7,7 +7,7 @@ Group:          Development/Tools
 License:        GPLv2+
 URL:            https://fedoraproject.org/wiki/Fedora_Gooey_Karma
 
-Source0:        fedora-gooey-karma.tar.gz
+Source0:        https://github.com/blaskovic/fedora-gooey-karma/archive/fedora-gooey-karma-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:      noarch
 
