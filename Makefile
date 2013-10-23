@@ -15,6 +15,7 @@ install:
 	mkdir -p $(DESTDIR)$(DATADIR)/$(NAME)
 	install -D -p -m 755 src/$(NAME) $(DESTDIR)$(BINDIR)/$(NAME)
 	install -D -p -m 755 src/*.py $(DESTDIR)$(DATADIR)/$(NAME)/
+	chmod 0644 $(DESTDIR)$(DATADIR)/$(NAME)/mainwindow_gui.py
 	mkdir -p $(DESTDIR)$(DATADIR)/applications
 	install -D -p -m 644 $(NAME).desktop $(DESTDIR)$(DATADIR)/applications/
 
