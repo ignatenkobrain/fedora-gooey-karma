@@ -17,6 +17,7 @@ install:
 	install -D -p -m 644 src/*.py $(DESTDIR)$(DATADIR)/$(NAME)/
 	mkdir -p $(DESTDIR)$(DATADIR)/applications
 	install -D -p -m 644 $(NAME).desktop $(DESTDIR)$(DATADIR)/applications/
+	mkdir -p $(DESTDIR)$(DATADIR)/icons/hicolor/
 	cp -r icons/* $(DESTDIR)$(DATADIR)/icons/hicolor/
 	chmod 644 $(DESTDIR)$(DATADIR)/icons/hicolor/*/apps/$(NAME).png
 
