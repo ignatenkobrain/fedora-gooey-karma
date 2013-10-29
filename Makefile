@@ -17,11 +17,14 @@ install:
 	install -D -p -m 644 src/*.py $(DESTDIR)$(DATADIR)/$(NAME)/
 	mkdir -p $(DESTDIR)$(DATADIR)/applications
 	install -D -p -m 644 $(NAME).desktop $(DESTDIR)$(DATADIR)/applications/
+	cp -r icons/* $(DESTDIR)$(DATADIR)/icons/hicolor/
+	chmod 644 $(DESTDIR)$(DATADIR)/icons/hicolor/*/apps/$(NAME).png
 
 uninstall:
 	rm -rf $(DESTDIR)$(DATADIR)/$(NAME)
 	rm -f $(DESTDIR)$(BINDIR)/$(NAME)
 	rm -f $(DESTDIR)$(DATADIR)/applications/$(NAME).desktop
+	rm -f $(DESTDIR)$(DATADIR)/icons/hicolor/*/apps/$(NAME).png
 
 clean:
 	rm src/*.pyc
