@@ -1,16 +1,16 @@
 #!/bin/bash
 
-set -x
+#set -x
 
+rm -rfv ~/rpmbuild
 rpmdev-setuptree ~
-cp fedora-gooey-karma.spec ~/rpmbuild/SPECS/
 
+sourceurl=$( python -c "import rpm; spec = rpm.spec('fedora-gooey-karma.spec'); print spec.sources[0][0]")
+echo "Source: $sourceurl"
 pushd ~/rpmbuild/SOURCES
-git clone git://github.com/blaskovic/fedora-gooey-karma.git fedora-gooey-karma
-#cp -r ~/Repo/fedora-gooey-karma .
-tar cvzf fedora-gooey-karma.tar.gz fedora-gooey-karma/*
+wget "$sourceurl"
 popd
+rpmbuild -bb fedora-gooey-karma.spec
 
-rpmbuild -ba ~/rpmbuild/SPECS/fedora-gooey-karma.spec
 
-set +x
+#set +x
