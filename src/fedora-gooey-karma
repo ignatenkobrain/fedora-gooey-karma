@@ -287,7 +287,7 @@ class MainWindow(QtGui.QMainWindow):
 
                     # Add comment as child to update
                     line = QtGui.QTreeWidgetItem()
-                    line.setText(0, str(comment['text']))
+                    line.setText(0, comment['text'].encode('utf-8'))
                     update_item.insertChild(0, line)
 
             # If it is in favorited packages, update list
