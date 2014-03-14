@@ -1,0 +1,26 @@
+fedora-gooey-karma(1)
+=====================
+:man source:  fedora-gooey-karma
+:man manual:  FEDORA-GOOEY-KARMA
+
+NAME
+----
+
+fedora-gooey-karma - GUI tool for sending feedback about installed Test Update packages
+
+SYNOPSIS
+--------
+
+fedora-gooey-karma
+
+DESCRIPTION
+-----------
+
+Fedora-gooey-karma helps you to easily and fast provide feedback for all testing
+updates that you have currently installed and browse the available ones. It is
+similar tool to fedora-easy-karma but with graphical front-end.
+
+
+AUTHORS
+-------
+Branislav Blaškovič <branislav@blaskovic.sk>
