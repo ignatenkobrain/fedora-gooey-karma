@@ -62,7 +62,6 @@ install -p -m 644 man/fedora-gooey-karma.1 %{buildroot}/%{_mandir}/man1/
 %{_bindir}/%{name}
 %{_datadir}/%{name}
 %{_datadir}/applications/%{name}.desktop
-%{_datadir}/icons/hicolor/*/apps/
 %{_datadir}/icons/hicolor/*/apps/%{name}.png
 %{_mandir}/man1/fedora-gooey-karma.1*
 
