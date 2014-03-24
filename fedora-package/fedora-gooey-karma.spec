@@ -3,7 +3,7 @@
 
 Name:           fedora-gooey-karma
 Version:        0.1
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        GUI tool for sending feedback about installed Test Update packages
 
 Group:          Development/Tools
@@ -66,6 +66,9 @@ install -p -m 644 man/fedora-gooey-karma.1 %{buildroot}/%{_mandir}/man1/
 %{_mandir}/man1/fedora-gooey-karma.1*
 
 %changelog
+* Sat Mar 22 2014 Branislav Blaskovic <branislav@blaskovic.sk> - 0.1-4
+- Deleted icons folder from files
+
 * Fri Mar 14 2014 Branislav Blaskovic <branislav@blaskovic.sk> - 0.1-3
 - Fixed UnicodeEncodeError issue #28
 - Require for hicolor-icon-theme added
