@@ -158,13 +158,13 @@ class BodhiWorker(QtCore.QThread):
                     # Does this build match with our current build?
                     if build['nvr'] == package.nvr:
                         update['itemlist_name'] = package.nvr
-                        update['yum_package'] = package
+                        update['dnf_package'] = package
                         update['variant'] = 'installed'
                         return ['installed', update]
                     # If not, there could be newer version
                     elif build.package.name == package.name:
                         update['itemlist_name'] = build['nvr']
-                        update['yum_package'] = build.package
+                        update['dnf_package'] = build.package
                         update['variant'] = 'available'
                         return ['available', update]
 

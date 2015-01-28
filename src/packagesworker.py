@@ -21,12 +21,11 @@
 #    Author: Branislav Blaskovic <branislav@blaskovic.sk>
 #    Author: Tomas Meszaros <exo@tty.sk>
 
-import yum
+import dnf
 import rpm
 import datetime
 import koji
 from PySide import QtCore
-from yum.misc import getCacheDir
 from idlequeue import *
 
 class PackagesWorker(QtCore.QThread):
@@ -40,9 +39,8 @@ class PackagesWorker(QtCore.QThread):
         self.bodhi_workers_queue = bodhi_workers_queue
         self.bodhi_workers_count = bodhi_workers_count
 
-        self.yb = yum.YumBase()
-        cachedir = getCacheDir()
-        self.yb.repos.setCacheDir(cachedir)
+        self.yb = dnf.Base()
+        self.yb.conf.cachedir = dnf.yum.misc.getCacheDir()
 
         # RPM Transactions
         self.rpmTS = rpm.TransactionSet()
@@ -64,8 +62,8 @@ class PackagesWorker(QtCore.QThread):
             self.queue.task_done()
 
     def load_installed(self, releasever):
-        # Load from yum rpmdb all installed packages
-        self.installed_packages = self.yb.rpmdb.returnPackages()
+        # Load from dnf sack all installed packages
+        self.installed_packages = self.yb.sack.query().installed().run()
 
         # Send it to all bodhi_workers
         for i in range(self.bodhi_workers_count):
